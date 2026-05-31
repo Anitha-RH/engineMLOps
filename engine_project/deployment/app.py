@@ -10,9 +10,9 @@ model_path = hf_hub_download(repo_id="AnithaRH/engine-maintenance-rf", filename=
 model = joblib.load(model_path)
 
 # Streamlit UI for Engine Predictive Maintenance
-st.title("Engine Predictive Maintenance App")
-st.write("This app is an internal tool for fleet operators and maintenance engineers to predict whether an engine requires maintenance based on its sensor readings.")
-st.write("Kindly enter the engine sensor readings below to check whether the engine needs maintenance.")
+st.title("Engine Health Monitoring System")
+st.write("Welcome to the Engine Health Monitoring System — a diagnostic tool designed for maintenance teams and engineers to assess engine condition using real-time sensor data.")
+st.write("Please provide the current sensor readings below to determine whether the engine is in a healthy state or requires immediate attention.")
 
 # Collect user input
 Engine_RPM = st.number_input("Engine RPM (rotations per minute)", min_value=0, max_value=3000, value=800)
@@ -33,7 +33,7 @@ input_data = pd.DataFrame([{
 }])
 
 # Predict button
-if st.button("Predict"):
+if st.button("Check Engine Status"):
     prediction = model.predict(input_data)[0]
-    result = "requires maintenance 🔧" if prediction == 1 else "is operating normally ✅"
-    st.write(f"Based on the sensor readings provided, the engine {result}.")
+    result = "needs immediate maintenance attention 🔧" if prediction == 1 else "is in a healthy condition ✅"
+    st.write(f"Based on the sensor data provided, the engine {result}.")
